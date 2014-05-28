@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="strncpy"
+	Name="Strncpy"
 	ProjectGUID="{07D20E27-BC00-4BD7-BE2B-6F59A4646937}"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="0"

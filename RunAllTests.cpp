@@ -6,103 +6,88 @@ extern "C"
 {
 }
 
-TEST_GROUP(strncpy) {
+TEST_GROUP(alltests) {
 
-	char buf1[5];
-	char buf2[5];
-	char safeguard;
+	char buffer[6];
+	char safe_space[6];
+	char safe_terminator[1];
 
 	void setup() {
-		memset(buf1, 'x', 5);
-		memset(buf2, 'x', 5);
-		safeguard = 0;
+		memset(buffer, 'x', 6);
+		memset(safe_space, 'x', 6);
+		*safe_terminator = 0;
 	}
 };
 
 #pragma warning(push)
 #pragma warning(disable:4996)
 
-TEST(strncpy, does_not_zero_terminate) {
-	strncpy(buf1, "womanizer", 4);
-	STRCMP_EQUAL("womaxxxxxx", buf1);
+TEST(alltests, strncpy_does_not_zero_terminate) {
+	strncpy(buffer, "womanizer", 4);
+	STRCMP_EQUAL("womaxxxxxxxx", buffer);
 }
 
-TEST(strncpy, overwrites_buffer_boundary) {
-	strncpy(buf1, "womanizer", 9);
-	STRCMP_EQUAL("womanizerx", buf1);
+TEST(alltests, strncpy_overwrites_buffer_boundary) {
+	strncpy(buffer, "womanizer", 9);
+	STRCMP_EQUAL("womanizerxxx", buffer);
 }
 
-TEST(strncpy, will_terminate_if_size_enough) {
-	strncpy(buf1, "womanizer", 10);
-	STRCMP_EQUAL("womanizer", buf1);
+TEST(alltests, strncpy_will_terminate_if_size_is_big_enough) {
+	strncpy(buffer, "womanizer", 10);
+	STRCMP_EQUAL("womanizer", buffer);
 }
 
-TEST(strncpy, behaves_itself_if_size_is_alright) {
-	strncpy(buf1, "woma", 5);
-	STRCMP_EQUAL("woma", buf1);
-	STRCMP_EQUAL("xxxxx", buf2);
+TEST(alltests, strncpy_behaves_properly_if_sizeof_string_is_smaller_than_size) {
+	strncpy(buffer, "woman", 6);
+	STRCMP_EQUAL("woman", buffer);
+	STRCMP_EQUAL("xxxxxx", safe_space);
 }
 
-TEST(strncpy, size_is_zero) {
-	strncpy(buf1, "woma", 0);
-	STRCMP_EQUAL("xxxxxxxxxx", buf1);
-	STRCMP_EQUAL("xxxxx", buf2);
+TEST(alltests, strncpy_does_nothing_if_size_is_zero) {
+	strncpy(buffer, "woman", 0);
+	STRCMP_EQUAL("xxxxxxxxxxxx", buffer);
 }
 
-TEST(strncpy, string_is_empty) {
-	strncpy(buf1, "", 1);
-	STRCMP_EQUAL("", buf1);
-	STRCMP_EQUAL("xxxxx", buf2);
+TEST(alltests, strncpy_copies_empty_string_if_string_is_empty) {
+	strncpy(buffer, "", 1);
+	STRCMP_EQUAL("", buffer);
+	STRCMP_EQUAL("xxxxxx", safe_space);
 }
 
 #pragma warning(pop)
 
 #define _ALL ((size_t)-1)
 
-TEST_GROUP(strncpy_s) {
-
-	char buf1[5];
-	char buf2[5];
-	char safeguard;
-
-	void setup() {
-		memset(buf1, 'x', 5);
-		memset(buf2, 'x', 5);
-		safeguard = 0;
-	}
-};
-
-TEST(strncpy_s, does_not_zero_terminate) {
-	strncpy_s(buf1, _ALL, "womanizer", 4);
-	STRCMP_EQUAL("womaxxxxxx", buf1);
+TEST(alltests, strncpy_s_does_zero_terminate) {
+	strncpy_s(buffer, _ALL, "womanizer", 4);
+	STRCMP_EQUAL("woma", buffer);
 }
 
-TEST(strncpy_s, overwrites_buffer_boundary) {
-	strncpy_s(buf1, _ALL, "womanizer", 9);
-	STRCMP_EQUAL("womanizerx", buf1);
+TEST(alltests, strncpy_s_overwrites_buffer_boundary) {
+	strncpy_s(buffer, _ALL, "womanizer", 9);
+	STRCMP_EQUAL("womanizer", buffer);
 }
 
-TEST(strncpy_s, will_terminate_if_size_enough) {
-	strncpy_s(buf1, _ALL, "womanizer", 10);
-	STRCMP_EQUAL("womanizer", buf1);
+TEST(alltests, strncpy_s_will_terminate_if_size_enough) {
+	strncpy_s(buffer, _ALL, "womanizer", 10);
+	STRCMP_EQUAL("womanizer", buffer);
 }
 
-TEST(strncpy_s, behaves_itself_if_size_is_alright) {
-	strncpy_s(buf1, _ALL, "woma", 5);
-	STRCMP_EQUAL("woma", buf1);
-	STRCMP_EQUAL("xxxxx", buf2);
+TEST(alltests, strncpy_s_behaves_properly_if_length_of_string_is_smaller_than_size) {
+	strncpy_s(buffer, _ALL, "woman", 6);
+	STRCMP_EQUAL("woman", buffer);
+	STRCMP_EQUAL("xxxxxx", safe_space);
 }
 
-TEST(strncpy_s, size_is_zero) {
-	strncpy_s(buf1, _ALL, "woma", 0);
-	STRCMP_EQUAL("xxxxxxxxxx", buf1);
-	STRCMP_EQUAL("xxxxx", buf2);
+TEST(alltests, strncpy_s_truncates_to_empty_string_if_size_is_zero) {
+	strncpy_s(buffer, _ALL, "woma", 0);
+	STRCMP_EQUAL("", buffer);
 }
 
-TEST(strncpy_s, string_is_empty) {
-	strncpy_s(buf1, _ALL, "", 1);
-	STRCMP_EQUAL("", buf1);
-	STRCMP_EQUAL("xxxxx", buf2);
+TEST(alltests, strncpy_s_copies_empty_string_if_string_is_empty) {
+	strncpy_s(buffer, _ALL, "", 1);
+	STRCMP_EQUAL("", buffer);
+	STRCMP_EQUAL("xxxxxx", safe_space);
 }
 
 int main(int ac, char** av)
