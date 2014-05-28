@@ -47,13 +47,16 @@ typedef int errno_t;
 
 #include <stdio.h>
 #include <sys/types.h>
-#include <inttypes.h>
+//#include <inttypes.h>
 #include <stdint.h>
 #include <errno.h>
 
 typedef int errno_t;
 
-#include <stdbool.h>
+//#include <stdbool.h>
+typedef int bool;
+
+#define inline _inline
 
 #endif /* __KERNEL__ */
 #endif /* __SAFE_TYPES_H__ */
