@@ -13,7 +13,7 @@ extern "C" void ignore_handler_s() {
 
 #define _IGNORE ((size_t)-1)
 
-/** Macro to "normalize" strncpy() function signature */
+/** Wrapper to "normalize" strncpy() function signature */
 
 int STRNCPY(char* buffer, size_t dummy, const char* string_to_copy, size_t size_to_copy) {
     __pragma(warning(push)) __pragma(warning(disable:4996))
