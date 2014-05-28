@@ -1,0 +1,9 @@
+*.depend
+*.layout
+*.7z
+*.exe
+*.pdb
+*.suo
+*.ncb
+*.user
+/Debug
