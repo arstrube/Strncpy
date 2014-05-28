@@ -1,3 +1,16 @@
-OUTPUT PARAMETERS TEST EXAMPLE
+TESTS TO COMPARE BEHAVIOR OF STRNCPY VS. STRNCPY_S
+
+These tests were written to determine whether it would be
+preferable to use strncpy_s() in the CppUTest project,
+even though the destination size parameter would be ignored,
+or to continue using strncpy().
+
+Also, for non-Microsoft targets, whether there is a
+suitable implementation of strncpy_s() for GNU-based
+systems.
+
+Because of this, macros are employed, and each test
+tests all implementations, so it is easy to see where
+they differ.
 
 (c) 2014 Arnd R. Strube

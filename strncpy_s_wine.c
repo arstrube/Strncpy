@@ -1,6 +1,6 @@
 /** Custom implementation of strncpy_s().
   *
-  * Free (largely de-Microsoftified) rendering of an implementation 
+  * Free (largely de-Microsoft-ified) rendering of an implementation 
   * found at http://www.winehq.org/.
   *
   */
