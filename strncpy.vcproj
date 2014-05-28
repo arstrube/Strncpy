@@ -209,6 +209,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\strncpy_s_v8.c"
+				>
+			</File>
+			<File
 				RelativePath=".\strncpy_s_wine.c"
 				>
 			</File>
