@@ -98,7 +98,7 @@
  *-
  */
 errno_t
-strncpy_s (char *dest, rsize_t dmax, const char *src, rsize_t slen)
+strncpy_s_safe (char *dest, rsize_t dmax, const char *src, rsize_t slen)
 {
     rsize_t orig_dmax;
     char *orig_dest;
