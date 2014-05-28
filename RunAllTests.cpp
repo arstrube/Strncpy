@@ -4,7 +4,9 @@
 
 extern "C" {
 #include "strncpy_s_custom.h"
+void ignore_handler_s() {}
 }
+
 
 /** Macro to effectively ignore buffer_size in strncpy_s() */
 
@@ -44,36 +46,42 @@ TEST(alltests, does_it_zero_terminate) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "womanizer",  5, "womanxxxxxxx");
 	TEST_STRNCPY_FUNC(strncpy_s,      "womanizer",  5, "woman"       ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer",  5, "woman"       ); // safer
+	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer",  5, "woman"       ); // safer
 }
 
 TEST(alltests, does_it_overwrite_buffer_boundary) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "womanizer",  9, "womanizerxxx");
 	TEST_STRNCPY_FUNC(strncpy_s,      "womanizer",  9, "womanizer"   ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer",  9, "womanizer"   ); // safer
+	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer",  9, "womanizer"   ); // safer
 }
 
 TEST(alltests, will_it_zeroterminate_if_size_is_big_enough) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "womanizer", 10, "womanizer"   );
 	TEST_STRNCPY_FUNC(strncpy_s,      "womanizer", 10, "womanizer"   );
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer", 10, "womanizer"   );
+	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer", 10, "womanizer"   );
 }
 
 TEST(alltests, will_it_behave_properly_if_length_of_string_is_smaller_than_size) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "woman",      6, "woman"       );
 	TEST_STRNCPY_FUNC(strncpy_s,      "woman",      6, "woman"       );
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer", 10, "womanizer"   );
+	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer", 10, "womanizer"   );
 }
 
 TEST(alltests, strncpy_does_nothing_if_size_is_zero) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "woman",      0, "xxxxxxxxxxxx");
 	TEST_STRNCPY_FUNC(strncpy_s,      "woman",      0, ""            ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "woman",      0, ""            ); // safer
+	TEST_STRNCPY_FUNC(strncpy_s_safe, "woman",      0, ""            ); // safer
 }
 
 TEST(alltests, strncpy_copies_empty_string_if_string_is_empty) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "",      1,     ""             );
 	TEST_STRNCPY_FUNC(strncpy_s,      "",      1,     ""             );
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "",      1,     ""             );
+	TEST_STRNCPY_FUNC(strncpy_s_safe, "",      1,     ""             );
 }
 
 

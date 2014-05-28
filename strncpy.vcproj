@@ -201,6 +201,14 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\libsafec\safe_str_constraint.c"
+				>
+			</File>
+			<File
+				RelativePath=".\strncpy_s_safe.c"
+				>
+			</File>
+			<File
 				RelativePath=".\strncpy_s_wine.c"
 				>
 			</File>
