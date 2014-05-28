@@ -4,6 +4,7 @@
 	Version="9,00"
 	Name="Strncpy"
 	ProjectGUID="{07D20E27-BC00-4BD7-BE2B-6F59A4646937}"
+	RootNamespace="Strncpy"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="0"
 	>
@@ -39,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="E:\CppUTest\include;E:\CppUTest\include\Platforms\VisualCpp;"
+				AdditionalIncludeDirectories="E:\CppUTest\include;E:\CppUTest\include\Platforms\VisualCpp;libsafec"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
