@@ -1,6 +1,8 @@
 /** Custom implementation of strncpy_s().
+  *
   * Free (largely de-Microsoftified) rendering of an implementation 
   * found at http://www.winehq.org/.
+  *
   */
 
 #include "strncpy_s_custom.h"
@@ -33,7 +35,6 @@ int strncpy_s_wine(char *dest, size_t numberOfElements, const char *src, size_t 
         return 0;
     }
 
-//    MSVCRT_INVALID_PMT("dest[numberOfElements] is too small", EINVAL);
     dest[0] = '\0';
     return EINVAL;
 }
