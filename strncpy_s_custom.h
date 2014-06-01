@@ -3,6 +3,10 @@
 
 #include <errno.h>
 
+/** libc implementation */
+
+int strncpy_libc(char* s1, size_t dummy, const char* s2, size_t n);
+
 /** Wine implementation */
 
 int     strncpy_s_wine (char *dest, size_t numberOfElements, const char *src, size_t count);

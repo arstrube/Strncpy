@@ -46,6 +46,7 @@ TEST_GROUP(alltests) {
 
 TEST(alltests, how_does_it_handle_NULL_source) {
 //	TEST_STRNCPY_FUNC(STRNCPY,        NULL,         5, "xxxxxxxxxxxx", 0      ); // crash!
+//	TEST_STRNCPY_FUNC(strncpy_libc,   NULL,         5, "xxxxxxxxxxxx", 0      ); // crash!
 //	TEST_STRNCPY_FUNC(strncpy_s     , NULL,         5, "xxxxxxxxxxxx", 0      ); // assertion error
 	TEST_STRNCPY_FUNC(strncpy_s_wine, NULL,         5, "xxxxxxxxxxxx", EINVAL ); // error
 	TEST_STRNCPY_FUNC(strncpy_s_safe, NULL,         5, "xxxxxxxxxxxx", ESLEMAX);
@@ -54,6 +55,7 @@ TEST(alltests, how_does_it_handle_NULL_source) {
 
 TEST(alltests, does_it_zero_terminate) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "womanizer",  5, "womanxxxxxxx", 0      );
+	TEST_STRNCPY_FUNC(strncpy_libc,   "womanizer",  5, "womanxxxxxxx", 0      );
 	TEST_STRNCPY_FUNC(strncpy_s,      "womanizer",  5, "woman",        0      ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer",  5, "woman",        0      ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer",  5, "woman",        ESLEMAX); // safer
@@ -62,6 +64,7 @@ TEST(alltests, does_it_zero_terminate) {
 
 TEST(alltests, does_it_overwrite_buffer_boundary) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "womanizer",  9, "womanizerxxx", 0      );
+	TEST_STRNCPY_FUNC(strncpy_libc,   "womanizer",  9, "womanizerxxx", 0      );
 	TEST_STRNCPY_FUNC(strncpy_s,      "womanizer",  9, "womanizer",    0      ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer",  9, "womanizer",    0      ); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer",  9, "womanizer",    ESLEMAX); // safer
@@ -70,6 +73,7 @@ TEST(alltests, does_it_overwrite_buffer_boundary) {
 
 TEST(alltests, will_it_zeroterminate_if_size_is_big_enough) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "womanizer", 10, "womanizer",    0      );
+	TEST_STRNCPY_FUNC(strncpy_libc,   "womanizer", 10, "womanizer",    0      );
 	TEST_STRNCPY_FUNC(strncpy_s,      "womanizer", 10, "womanizer",    0      );
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "womanizer", 10, "womanizer",    0      );
 	TEST_STRNCPY_FUNC(strncpy_s_safe, "womanizer", 10, "womanizer",    ESLEMAX);
@@ -78,6 +82,7 @@ TEST(alltests, will_it_zeroterminate_if_size_is_big_enough) {
 
 TEST(alltests, will_it_behave_properly_if_length_of_string_is_smaller_than_size) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "woman",      6, "woman",        0      );
+	TEST_STRNCPY_FUNC(strncpy_libc,   "woman",      6, "woman",        0      );
 	TEST_STRNCPY_FUNC(strncpy_s,      "woman",      6, "woman",        0      );
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "woman",      6, "woman",        0      );
 	TEST_STRNCPY_FUNC(strncpy_s_safe, "woman",      6, "woman",        ESLEMAX);
@@ -86,6 +91,7 @@ TEST(alltests, will_it_behave_properly_if_length_of_string_is_smaller_than_size)
 
 TEST(alltests, strncpy_does_nothing_if_size_is_zero) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "woman",      0, "xxxxxxxxxxxx", 0);
+	TEST_STRNCPY_FUNC(strncpy_libc,   "woman",      0, "xxxxxxxxxxxx", 0);
 	TEST_STRNCPY_FUNC(strncpy_s,      "woman",      0, "",             0); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "woman",      0, "",             0); // safer
 	TEST_STRNCPY_FUNC(strncpy_s_safe, "woman",      0, "",             ESLEMAX); // safer
@@ -94,6 +100,7 @@ TEST(alltests, strncpy_does_nothing_if_size_is_zero) {
 
 TEST(alltests, strncpy_copies_empty_string_if_string_is_empty) {
 	TEST_STRNCPY_FUNC(STRNCPY,        "",      1,     "",             0);
+	TEST_STRNCPY_FUNC(strncpy_libc,   "",      1,     "",             0);
 	TEST_STRNCPY_FUNC(strncpy_s,      "",      1,     "",             0);
 	TEST_STRNCPY_FUNC(strncpy_s_wine, "",      1,     "",             0);
 	TEST_STRNCPY_FUNC(strncpy_s_safe, "",      1,     "",             ESLEMAX);

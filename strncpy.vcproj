@@ -205,6 +205,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\strncpy_libc.c"
+				>
+			</File>
+			<File
 				RelativePath=".\strncpy_s_safe.c"
 				>
 			</File>
